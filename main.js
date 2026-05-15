@@ -58,8 +58,8 @@ async function loadPostDetail() {
 
     const container = document.getElementById('post-container');
     container.innerHTML = `
-        <a href="index.html" class="back-btn">← 返回首页</a>
-        <article class="post-detail">
+        <a href="index.html" class="back-btn reveal">← 返回首页</a>
+        <article class="post-detail reveal reveal-delay-1">
             <div class="post-header">
                 <h1 class="post-title">${post.title}</h1>
                 <div class="post-meta">
@@ -70,6 +70,8 @@ async function loadPostDetail() {
             <div class="post-content">${renderContent(post.content)}</div>
         </article>
     `;
+
+    initScrollReveal();
 }
 
 function renderContent(content) {
@@ -104,8 +106,67 @@ function renderContent(content) {
     return html;
 }
 
+/* ===== Scroll Animations ===== */
+
+function initScrollProgress() {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    document.body.prepend(bar);
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+    });
+}
+
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initHeaderParallax() {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        if (scrollTop < window.innerHeight) {
+            header.style.opacity = Math.max(0.3, 1 - scrollTop / 400);
+        }
+    });
+}
+
+function applyRevealToPosts() {
+    const cards = document.querySelectorAll('.post-card');
+    cards.forEach((card, i) => {
+        card.classList.add('reveal');
+        const delayIndex = Math.min(i, 5);
+        card.classList.add('reveal-delay-' + delayIndex);
+    });
+    initScrollReveal();
+}
+
 if (window.location.pathname.endsWith('post.html') || window.location.pathname.includes('post.html')) {
     loadPostDetail();
 } else {
-    loadPosts().then(renderPosts);
+    loadPosts().then(posts => {
+        renderPosts(posts);
+        applyRevealToPosts();
+    });
 }
+
+initScrollProgress();
+initHeaderParallax();
