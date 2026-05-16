@@ -162,28 +162,27 @@ function applyRevealToPosts() {
     initScrollReveal();
 }
 
-const COUNT_API = 'https://api.countapi.xyz';
-const COUNT_NAMESPACE = 'nature-blog';
+const COUNT_API = 'https://countapi.mileshilliard.com/api/v1';
 
 async function loadCounts(postId) {
     try {
-        const viewRes = await fetch(`${COUNT_API}/get/${COUNT_NAMESPACE}/${postId}-views`);
+        const viewRes = await fetch(`${COUNT_API}/get/${postId}-views`);
         const viewData = await viewRes.json();
-        document.getElementById('view-count').textContent = viewData.value || 0;
+        document.getElementById('view-count').textContent = parseInt(viewData.value) || 0;
     } catch (e) {
         console.log('加载阅读数失败');
     }
 
     try {
-        const likeRes = await fetch(`${COUNT_API}/get/${COUNT_NAMESPACE}/${postId}-likes`);
+        const likeRes = await fetch(`${COUNT_API}/get/${postId}-likes`);
         const likeData = await likeRes.json();
-        document.getElementById('like-count').textContent = likeData.value || 0;
+        document.getElementById('like-count').textContent = parseInt(likeData.value) || 0;
     } catch (e) {
         console.log('加载点赞数失败');
     }
 
     try {
-        await fetch(`${COUNT_API}/hit/${COUNT_NAMESPACE}/${postId}-views`);
+        await fetch(`${COUNT_API}/hit/${postId}-views`);
     } catch (e) {
         console.log('更新阅读数失败');
     }
@@ -201,9 +200,9 @@ async function handleLike() {
     if (likeBtn.classList.contains('liked')) return;
 
     try {
-        const res = await fetch(`${COUNT_API}/hit/${COUNT_NAMESPACE}/${postId}-likes`);
+        const res = await fetch(`${COUNT_API}/hit/${postId}-likes`);
         const data = await res.json();
-        likeCount.textContent = data.value;
+        likeCount.textContent = parseInt(data.value);
         likeBtn.classList.add('liked');
         likeIcon.textContent = '♥';
     } catch (e) {
