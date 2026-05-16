@@ -298,6 +298,7 @@ main {
 /* ===== Header Parallax ===== */
 header {
     will-change: transform;
+    transform: translateZ(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
