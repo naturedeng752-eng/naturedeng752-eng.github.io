@@ -332,3 +332,80 @@ footer {
         padding: 0;
     }
 }
+
+/* ===== Interaction Bar ===== */
+.interaction-bar {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+    margin-top: 48px;
+    border-top: 1px solid #1d1d1f;
+    border-bottom: 1px solid #1d1d1f;
+}
+
+.interaction-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid #2d2d2f;
+    color: #86868b;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+
+.interaction-btn:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.interaction-btn.liked {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.interaction-btn.liked #like-icon {
+    color: #ff4444;
+}
+
+#like-icon {
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.interaction-btn:hover #like-icon {
+    transform: scale(1.2);
+}
+
+.interaction-info {
+    color: #86868b;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+/* ===== Comments Section ===== */
+.comments-section {
+    display: none;
+    margin-top: 48px;
+    padding-bottom: 48px;
+}
+
+.comments-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.giscus-loading {
+    text-align: center;
+    padding: 40px;
+    color: #86868b;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
