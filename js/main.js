@@ -148,6 +148,7 @@ function initHeaderParallax() {
         const scrollTop = window.scrollY;
         if (scrollTop < window.innerHeight) {
             header.style.opacity = Math.max(0.3, 1 - scrollTop / 400);
+            header.style.transform = 'translateY(' + scrollTop * 0.3 + 'px)';
         }
     });
 }
