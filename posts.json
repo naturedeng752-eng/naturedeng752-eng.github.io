@@ -3,7 +3,7 @@
         "id": "welcome",
         "title": "关于网站",
         "date": "2026-05-16",
-        "summary": "终于成功了:),tag随便加的",
+        "summary": "终于成功了:）,tag随便加的",
         "tags": ["生活", "随笔"],
         "content": "## 建站原因\n\n好玩。\n\n一开始并没有对vibe coding产生太大的兴趣。直到身边一个（应该）没有编程基础同学用vibe coding做出了他的个人网站，所以我也试了试。\n\n## 为什么是博客网站\n\n因为博客网站纯文本，好做。\n\n## 怎么做的\n\n在trae cn用的deepseek v4 flash，写了一个纯静态的网站。网页目前用github托管，后面可能会弄一个域名。"
     }
