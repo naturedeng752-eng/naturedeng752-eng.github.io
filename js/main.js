@@ -144,13 +144,25 @@ function initHeaderParallax() {
     const header = document.querySelector('header');
     if (!header) return;
 
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        if (scrollTop < window.innerHeight) {
-            header.style.opacity = Math.max(0.3, 1 - scrollTop / 400);
-            header.style.transform = 'translateY(' + scrollTop * 0.3 + 'px)';
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollTop = window.scrollY;
+                const isMobile = window.innerWidth < 768;
+
+                if (scrollTop < window.innerHeight) {
+                    header.style.opacity = Math.max(0.3, 1 - scrollTop / 400);
+                    if (!isMobile) {
+                        header.style.transform = 'translateY(' + scrollTop * 0.3 + 'px)';
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
-    });
+    }, { passive: true });
 }
 
 function applyRevealToPosts() {
