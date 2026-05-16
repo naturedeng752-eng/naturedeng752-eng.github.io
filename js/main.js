@@ -197,16 +197,30 @@ async function handleLike() {
     const likeIcon = document.getElementById('like-icon');
     const likeCount = document.getElementById('like-count');
 
-    if (likeBtn.classList.contains('liked')) return;
+    if (likeBtn.classList.contains('liked')) {
+        try {
+            const getRes = await fetch(`${COUNT_API}/get/${postId}-likes`);
+            const getData = await getRes.json();
+            const currentVal = parseInt(getData.value) || 0;
+            const newVal = Math.max(0, currentVal - 1);
 
-    try {
-        const res = await fetch(`${COUNT_API}/hit/${postId}-likes`);
-        const data = await res.json();
-        likeCount.textContent = parseInt(data.value);
-        likeBtn.classList.add('liked');
-        likeIcon.textContent = '♥';
-    } catch (e) {
-        console.log('点赞失败');
+            await fetch(`${COUNT_API}/set/${postId}-likes?value=${newVal}`);
+            likeCount.textContent = newVal;
+            likeBtn.classList.remove('liked');
+            likeIcon.textContent = '♡';
+        } catch (e) {
+            console.log('取消点赞失败');
+        }
+    } else {
+        try {
+            const res = await fetch(`${COUNT_API}/hit/${postId}-likes`);
+            const data = await res.json();
+            likeCount.textContent = parseInt(data.value);
+            likeBtn.classList.add('liked');
+            likeIcon.textContent = '♥';
+        } catch (e) {
+            console.log('点赞失败');
+        }
     }
 }
 
