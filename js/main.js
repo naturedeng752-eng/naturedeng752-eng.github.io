@@ -54,7 +54,7 @@ async function loadPostDetail() {
         return;
     }
 
-    document.title = `${post.title} - 我的个人博客`;
+    document.title = `${post.title} - Nature`;
 
     const container = document.getElementById('post-container');
     container.innerHTML = `
