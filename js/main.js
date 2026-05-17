@@ -245,6 +245,23 @@ function initGiscus(postId) {
         <h2 class="comments-title">评论</h2>
         <div class="giscus-loading">评论区加载中...</div>
     `;
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'naturedeng752-eng/naturedeng752-eng.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOSea6Jg');
+    script.setAttribute('data-category', 'General');
+    script.setAttribute('data-category-id', 'DIC_kwDOSea6Js4C9OE2');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'bottom');
+    script.setAttribute('data-theme', 'dark');
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    section.appendChild(script);
 }
 
 if (window.location.pathname.endsWith('post.html') || window.location.pathname.includes('post.html')) {
